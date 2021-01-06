@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Display } from "./Display";
 import { Controls } from "./Controls";
 import { GameContextProvider } from "./ContextProvider";
@@ -9,6 +9,8 @@ export const GameApp = () => {
   const [ai, setAi] = useState(null);
   const [loading, setLoading] = useState(false);
   const [userMove, setUserMove] = useState(null);
+  const [score, setScore] = useState(0);
+  const [games, setGames] = useState(0);
 
   const generateAiMove = () => {
     let index = Math.floor(Math.random() * 3);
@@ -25,7 +27,11 @@ export const GameApp = () => {
           loading,
           setLoading,
           setUserMove,
-          userMove
+          userMove,
+          setScore,
+          score,
+          setGames,
+          games
         }}
       >
         <Display />

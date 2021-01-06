@@ -3,14 +3,19 @@ import { Button } from "antd";
 import { gameContext } from "./ContextProvider";
 
 export const Controls = () => {
-  const { generateAiMove, loading, setLoading, setUserMove } = useContext(
-    gameContext
-  );
+  const {
+    generateAiMove,
+    loading,
+    setLoading,
+    setUserMove,
+    setGames
+  } = useContext(gameContext);
 
   const handleClick = (e) => {
     setLoading(true);
     setUserMove(e.target.textContent);
     setTimeout(() => generateAiMove(e.target.textContent), 1000);
+    setGames((score) => score + 1);
   };
 
   return (

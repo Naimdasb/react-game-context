@@ -6,7 +6,9 @@ import { Typography } from "antd";
 const { Title } = Typography;
 
 export const Display = () => {
-  const { ai, loading, userMove } = useContext(gameContext);
+  const { ai, loading, userMove, setScore, score, games } = useContext(
+    gameContext
+  );
   const [result, setResult] = useState(null);
 
   useEffect(() => {
@@ -18,6 +20,7 @@ export const Display = () => {
       case "Scissors": {
         if (ai === "paper") {
           setResult("You Win!");
+          setScore((score) => score + 1);
         } else {
           setResult("You lose!");
         }
@@ -26,6 +29,7 @@ export const Display = () => {
       case "Stone": {
         if (ai === "scissors") {
           setResult("You Win!");
+          setScore((score) => score + 1);
         } else {
           setResult("You lose!");
         }
@@ -34,6 +38,7 @@ export const Display = () => {
       case "Paper": {
         if (ai === "stone") {
           setResult("You Win!");
+          setScore((score) => score + 1);
         } else {
           setResult("You lose!");
         }
@@ -42,7 +47,8 @@ export const Display = () => {
       default:
         return null;
     }
-  }, [userMove, ai]);
+  }, [userMove, ai, setScore]);
+
   return (
     <div>
       <div
@@ -59,6 +65,12 @@ export const Display = () => {
         ) : (
           <Title level={3}>AI move! {ai} </Title>
         )}
+      </div>
+      <div>
+        <Title level={3}>Your Score: {score} </Title>
+      </div>
+      <div>
+        <Title level={3}>Games Played: {games} </Title>
       </div>
       <div
         style={{
